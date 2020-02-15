@@ -1,3 +1,11 @@
+<!-- xxml 是用来编写页面骨架的文件 -->
+<!-- <div> 容器 分隔文档 -->
 <view>
-  <text>hello</text>
+  <image style="width:200rpx;height:200rpx" src="/images/avatar.png"></image>
+  <text>Hello,CC</text>
+  <view>
+    <text>开启小程序之旅</text>
+  </view>
+  <!-- <button></button> -->
+  <!-- width:300px height 225px -->
 </view>
