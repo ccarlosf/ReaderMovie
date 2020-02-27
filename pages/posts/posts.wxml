@@ -1,5 +1,5 @@
 <view>
-  <swiper indicator-dots="true" interval="1000" autoplay="true">
+  <swiper indicator-dots="true" interval="5000" autoplay="true">
     <swiper-item>
       <image src="/images/wx.png"></image>
     </swiper-item>
@@ -10,4 +10,22 @@
       <image src="/images/iqiyi.png"></image>
     </swiper-item>
   </swiper>
+
+  <view>
+    <view>
+      <image src="/images/avatar/1.png"></image>
+      <text>Sep  18  z016</text>
+    </view>
+    <text>正是虾肥蟹壮时</text>
+    <image src="/images/post/crab.png"></image>
+    <text>玉手银筝柱，翠涛金屈卮，正是鱼肥蟹健时。诗，醉题秋扇儿。黄华字，乱风摇柳丝。
+出岫白云笑，入山明月愁，两字功名四十秋。羞，死封不义侯。村学究，且读书青海头。
+云雨山头暗，女牛大上期，宝鼎香寒玉漏迟。推，角门花影移。鸳鸯会，莫教明月知。</text>
+    <view>
+      <image src="../../images/icon/chat.png"></image>
+      <text>96</text>
+      <image src="../../images/icon/view.png"></image>
+      <text>112</text>
+    </view>
+  </view>
 </view>
