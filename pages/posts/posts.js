@@ -16,7 +16,7 @@ Page({
   onLoad: function(options) {
   
     this.setData({
-      posts_key: postsData.postList
+      postList: postsData.postList
       })
   }
 })
