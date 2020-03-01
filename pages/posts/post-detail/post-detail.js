@@ -27,6 +27,26 @@ Page({
     },
 
     onCollectionTap: function (event) {
+        this.getPostsCollectedSys();
+        // this.getPostsCollectedAsy();
+    },
+
+    getPostsCollectedAsy:function(){
+        var that = this;
+        wx.getStorage({
+            key: "posts_collected",
+            success:function (res) {
+                var postsCollected = res.data;
+                var postCollected = postsCollected[that.data.currentPostId];
+                // 收藏变成未收藏，未收藏变成收藏
+                postCollected = !postCollected;
+                postsCollected[that.data.currentPostId] = postCollected;
+                that.showToast(postsCollected, postCollected);
+            }
+        })
+    },
+
+    getPostsCollectedSys:function(){
         var postsCollected = wx.getStorageSync('posts_collected');
         var postCollected = postsCollected[this.data.currentPostId];
         // 收藏变成未收藏，未收藏变成收藏
@@ -86,8 +106,8 @@ Page({
                 // res.cancel 用户是不是点击了取消按钮
                 // res.tapIndex 数组元素的序号,从0开始
                 wx.showModal({
-                    title: "用户"+itemList[res.tapIndex],
-                    content: "用户是否取消?"+res.cancel+"现在无法实现分享功能，什么时候能支持呢？"
+                    title: "用户" + itemList[res.tapIndex],
+                    content: "用户是否取消?" + res.cancel + "现在无法实现分享功能，什么时候能支持呢？"
                 })
             }
         })
