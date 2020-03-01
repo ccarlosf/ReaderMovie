@@ -9,14 +9,18 @@ Page({
   data: {
   },
 
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function(options) {
   
     this.setData({
       postList: postsData.postList
       })
+  },
+
+  onPostTap:function (event) {
+    var postId = event.currentTarget.dataset.postid;
+    // console.log("on post id is"+postId)
+    wx.navigateTo({
+      url:"post-detail/post-detail"
+    })
   }
 })
