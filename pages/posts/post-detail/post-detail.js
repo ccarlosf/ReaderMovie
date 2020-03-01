@@ -1,33 +1,44 @@
-var postsData = require('../../../data/posts-data.js')
+var postsData = require('../../../data/posts-data')
 
 Page({
-    onLoad:function (option) {
+    data:{
+
+    },
+    onLoad: function (option) {
+        console.log("微信小程序")
         var postId = option.id;
+        this.data.currentPostId = postId;
         var postData = postsData.postList[postId];
         this.setData({
             postData: postData
         })
-
-        // wx.setStorageSync('key',"风暴英雄")
-        wx.setStorageSync('key', {
-            game: "风暴英雄",
-            developer: "暴雪"
-        })
-
-        wx.setStorageSync('key1', {
-            game: "LOL",
-            developer: "拳头"
-        })
+        wx.setStorageSync('key','英雄联盟')
+        var postsCollected = wx.getStorageSync('posts_collected')
+        if (postsCollected) {
+            var postCollected = postsCollected[postId]
+            if(postCollected){
+                this.setData({
+                    collected: postCollected
+                })
+            }
+        } else {
+            var postsCollected = {};
+            postsCollected[postId] = false;
+            wx.setStorageSync('posts_collected',postsCollected)
+        }
     },
 
-    onCollectionTap:function (event) {
-       var game = wx.getStorageSync('key');
-        console.log(game)
-    },
-
-    onShareTap:function (event) {
-        // wx.removeStorageSync('key')
-        // 缓存的上限最大不能超过10M
-        wx.clearStorageSync();
+    onCollectionTap: function (event) {
+        var postsCollected = wx.getStorageSync('posts_collected');
+        var postCollected = postsCollected[this.data.currentPostId];
+        // 收藏变成未收藏，未收藏变成收藏
+        postCollected = !postCollected;
+        postsCollected[this.data.currentPostId] = postCollected;
+        // 更新文章是否的缓存值
+        wx.setStorageSync('posts_collected',postsCollected);
+        // 更新数据绑定变量，从而实现切换图片
+        this.setData({
+            collected: postCollected
+        })
     }
 })
