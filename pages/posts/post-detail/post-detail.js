@@ -1,9 +1,7 @@
 var postsData = require('../../../data/posts-data')
 
 Page({
-    data:{
-
-    },
+    data: {},
     onLoad: function (option) {
         console.log("微信小程序")
         var postId = option.id;
@@ -12,11 +10,11 @@ Page({
         this.setData({
             postData: postData
         })
-        wx.setStorageSync('key','英雄联盟')
+        wx.setStorageSync('key', '英雄联盟')
         var postsCollected = wx.getStorageSync('posts_collected')
         if (postsCollected) {
             var postCollected = postsCollected[postId]
-            if(postCollected){
+            if (postCollected) {
                 this.setData({
                     collected: postCollected
                 })
@@ -24,7 +22,7 @@ Page({
         } else {
             var postsCollected = {};
             postsCollected[postId] = false;
-            wx.setStorageSync('posts_collected',postsCollected)
+            wx.setStorageSync('posts_collected', postsCollected)
         }
     },
 
@@ -35,10 +33,16 @@ Page({
         postCollected = !postCollected;
         postsCollected[this.data.currentPostId] = postCollected;
         // 更新文章是否的缓存值
-        wx.setStorageSync('posts_collected',postsCollected);
+        wx.setStorageSync('posts_collected', postsCollected);
         // 更新数据绑定变量，从而实现切换图片
         this.setData({
             collected: postCollected
+        })
+
+        wx.showToast({
+            title: postCollected ? "收藏成功" : "取消成功",
+            duration: 1000,
+            icon:"success"
         })
     }
 })
