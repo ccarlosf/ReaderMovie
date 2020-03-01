@@ -1,7 +1,9 @@
 var postsData = require('../../../data/posts-data')
 
 Page({
-    data: {},
+    data: {
+        isPlayingMusic: false
+    },
     onLoad: function (option) {
         // console.log("微信小程序")
         var postId = option.id;
@@ -31,11 +33,11 @@ Page({
         // this.getPostsCollectedAsy();
     },
 
-    getPostsCollectedAsy:function(){
+    getPostsCollectedAsy: function () {
         var that = this;
         wx.getStorage({
             key: "posts_collected",
-            success:function (res) {
+            success: function (res) {
                 var postsCollected = res.data;
                 var postCollected = postsCollected[that.data.currentPostId];
                 // 收藏变成未收藏，未收藏变成收藏
@@ -46,7 +48,7 @@ Page({
         })
     },
 
-    getPostsCollectedSys:function(){
+    getPostsCollectedSys: function () {
         var postsCollected = wx.getStorageSync('posts_collected');
         var postCollected = postsCollected[this.data.currentPostId];
         // 收藏变成未收藏，未收藏变成收藏
@@ -84,7 +86,7 @@ Page({
         // 更新数据绑定变量，从而实现切换图片
         this.setData({
             collected: postCollected
-        })
+        });
         wx.showToast({
             title: postCollected ? "收藏成功" : "取消成功",
             duration: 1000,
@@ -111,5 +113,27 @@ Page({
                 })
             }
         })
+    },
+
+    onMusicTap: function (event) {
+        var currentPostId = this.data.currentPostId;
+        var isPlayingMusic = this.data.isPlayingMusic;
+        var postData = postsData.postList[currentPostId]
+        if (isPlayingMusic) {
+            wx.pauseBackgroundAudio();
+            this.setData({
+                isPlayingMusic:false
+            })
+
+        } else {
+            wx.playBackgroundAudio({
+                dataUrl: postData.music.url,
+                title: postData.music.title,
+                coverImgUrl: postData.music.coverImg,
+            })
+            this.setData({
+                isPlayingMusic:true
+            })
+        }
     }
 })
