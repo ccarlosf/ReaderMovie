@@ -1,11 +1,11 @@
 var postsData = require('../../../data/posts-data')
-
+var app = getApp();
 Page({
     data: {
-        isPlayingMusic: false
+        isPlayingMusic: false,
     },
     onLoad: function (option) {
-        // console.log("微信小程序")
+        var globalData = app.globalData;
         var postId = option.id;
         this.data.currentPostId = postId;
         var postData = postsData.postList[postId];
