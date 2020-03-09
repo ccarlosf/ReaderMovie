@@ -1,0 +1,11 @@
+<template name="startsTemplate">
+    <view>
+        <image src="/images/icon/start.png"></image>
+        <image src="/images/icon/start.png"></image>
+        <image src="/images/icon/start.png"></image>
+        <image src="/images/icon/start.png"></image>
+        <image src="/images/icon/start.png"></image>
+        <text>
+        </text>
+    </view>
+</template>
